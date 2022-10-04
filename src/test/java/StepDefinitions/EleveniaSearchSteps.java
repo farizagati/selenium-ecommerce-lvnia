@@ -1,6 +1,6 @@
 package StepDefinitions;
 
-import StepDefinitions.base.Hooks;
+import PageObjects.BasePO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,24 +10,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static Utilities.DriverFactory.getDriver;
 
-public class EleveniaSearchSteps{
+public class EleveniaSearchSteps extends BasePO {
     private WebDriver driver = getDriver();
 
     @Given("Open website {string}")
     public void open_website(String url) {
-        driver.get(url);
+        //driver.get(url);
+        navigateTo_URL(url);
     }
     @And("Located on elevenia website")
-    public void located_on_elevenia_website() {
+    public void located_on_elevenia_website(){
         driver.findElement(By.id("mainPopBanner"));
         driver.findElement(By.cssSelector(".btn-close")).click();
-
     }
     @Then("I search for product terlaris in {string} keyword")
     public void i_search_for_product_terlaris_in_keyword(String searchKeyword) throws InterruptedException {
-        driver.findElement(By.id("AKCKwd")).sendKeys(searchKeyword, Keys.RETURN);
+        Thread.sleep(2000);
+        sendKeys(By.id("AKCKwd"), searchKeyword);
+        sendKeys(By.id("AKCKwd"), String.valueOf(Keys.RETURN));
         driver.findElement(By.xpath("//a[.='Produk terlaris']")).click();
         //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='prodListType']/ul[1]/li[1]/div[@class='group']")));
