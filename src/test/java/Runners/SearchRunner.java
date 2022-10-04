@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
         features = {"classpath:features"},
         tags = "@search" ,
         glue = {"StepDefinitions"},
-        plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"},
+        plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json"},
         monochrome = true, dryRun = false
 )
 
