@@ -15,14 +15,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class EleveniaSearchSteps {
-    private WebDriver driver;
+    WebDriver driver;
 
     @Before
     public void setup(){
-        System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/main/java/drivers/chromedriver");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new ChromeDriver(chromeOptions);
+        driver = WebDriverManager.chromedriver().create();
         driver.manage().window().setSize(new Dimension(1920,1080));
     }
     @After
