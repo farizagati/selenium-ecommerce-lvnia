@@ -22,6 +22,20 @@ public class Homepage_PO extends BasePO{
     WebElement txtFieldQtyItem;
     private @FindBy(xpath = "//a[.='Tambahkan ke Cart']")
     WebElement btnTambahkeCart;
+    private @FindBy(xpath = "//a[@href='http://www.elevenia.co.id/cart/CartAction/getCartList.do']")
+    WebElement btnYaLihatCart;
+    private @FindBy(css = ".prod")
+    WebElement txtHeaderProduk;
+    private @FindBy(name = "deliveryChangePopup")
+    WebElement btnUbahKurir;
+    private @FindBy(css = "strong")
+    WebElement txtHeaderUbahKurir;
+    private @FindBy(name = ".btnClose")
+    WebElement btnBatalUbahKurir;
+    private @FindBy(id = "chkDelPopY")
+    WebElement btnHapusCartItem;
+    private @FindBy(xpath = "//strong[.='Tidak ada produk di Shopping Cart.']")
+    WebElement txtTidakAdaItemDiCart;
 
 
     public Homepage_PO(){
@@ -53,6 +67,28 @@ public class Homepage_PO extends BasePO{
     public void clickBtnTambahkeCart() throws InterruptedException {
         Thread.sleep(2000);
         waitForWebElementAndClick(btnTambahkeCart);
+    }
+    public void clickBtnYaLihatCart() throws InterruptedException {
+        Thread.sleep(2000);
+        waitForWebElementAndClick(btnYaLihatCart);
+        Thread.sleep(3000);
+        verifyElementPresent(txtHeaderProduk);
+    }
+    public void clickBtnUbahKurir() throws InterruptedException {
+        Thread.sleep(1000);
+        waitForWebElementAndClick(btnUbahKurir);
+        Thread.sleep(2000);
+        verifyElementPresent(txtHeaderUbahKurir);
+    }
+    public void clickBtnBatalUbahKurir() throws InterruptedException {
+        Thread.sleep(2000);
+        waitForWebElementAndClick(btnBatalUbahKurir);
+    }
+    public void clickBtnHapusCartItem() throws InterruptedException {
+        Thread.sleep(2000);
+        waitForWebElementAndClick(btnHapusCartItem);
+        Thread.sleep(3000);
+        verifyElementPresent(txtTidakAdaItemDiCart);
     }
 
 

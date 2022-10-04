@@ -6,10 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 
 public class EleveniaSearchSteps extends BasePO {
@@ -44,43 +40,34 @@ public class EleveniaSearchSteps extends BasePO {
     }
     @Then("I go to cart section")
     public void i_go_to_cart_section() throws InterruptedException {
-        Thread.sleep(2000);
-        //driver.findElement(By.xpath("//a[@href='http://www.elevenia.co.id/cart/CartAction/getCartList.do']")).click();
-        WebElement element = driver.findElement(By.xpath("//a[@href='http://www.elevenia.co.id/cart/CartAction/getCartList.do']"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", element);
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector(".prod"));
+        Homepage_PO.clickBtnYaLihatCart();
     }
     @Then("I modify the courier option")
     public void i_modify_the_courier_option() throws InterruptedException {
-        Thread.sleep(2000);
-        WebElement element = driver.findElement(By.linkText("Ubah Kurir"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-
-        if (element.isDisplayed() && element.isEnabled()){
-            executor.executeScript("arguments[0].click();", element);
-        }
-        //driver.findElement(By.xpath("//a[@name='deliveryChangePopup']")).click();
-        driver.findElement(By.cssSelector("strong"));
+        Homepage_PO.clickBtnUbahKurir();
     }
     @Then("I cancel to modify the courier option")
-    public void i_cancel_to_modify_the_courier_option() {
+    public void i_cancel_to_modify_the_courier_option() throws InterruptedException {
+        Homepage_PO.clickBtnBatalUbahKurir();
+        Thread.sleep(3000);
 
-        driver.findElement(By.cssSelector(".btnWGray")).click();
+        //driver.findElement(By.cssSelector(".btnWGray")).click();
     }
     @Then("I cancel the product on my shopping cart")
-    public void i_cancel_the_product_on_my_shopping_cart() {
+    public void i_cancel_the_product_on_my_shopping_cart() throws InterruptedException {
+        Homepage_PO.clickBtnHapusCartItem();
 
+        /*
         driver.findElement(By.xpath("//p[@class='alignL']/a[.='Hapus']")).click();
         /*
         WebElement element = driver.findElement(By.xpath("//p[@class='alignL']/a[.='Hapus']"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
 
-         */
+
         driver.findElement(By.id("chkDelPopY")).click();
         driver.findElement(By.xpath("//strong[.='Tidak ada produk di Shopping Cart.']"));
+        */
     }
 
 }
