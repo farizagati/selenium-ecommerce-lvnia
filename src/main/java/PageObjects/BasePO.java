@@ -4,6 +4,7 @@ import Utilities.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,13 +13,23 @@ import java.time.Duration;
 
 public class BasePO {
     public BasePO(){
-
+        PageFactory.initElements(getDriver(),this);
     }
     public WebDriver getDriver(){
         return DriverFactory.getDriver();
     }
     public void navigateTo_URL(String url){
         getDriver().get(url);
+    }
+
+    public void verifyElementPresent(By by) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+    }
+
+    public void verifyElementPresent(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void sendKeys(By by, String textToType) {

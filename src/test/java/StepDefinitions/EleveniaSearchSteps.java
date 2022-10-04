@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import PageObjects.BasePO;
+import PageObjects.Homepage_PO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +14,11 @@ import java.time.Duration;
 
 public class EleveniaSearchSteps extends BasePO {
     private WebDriver driver = getDriver();
+    private Homepage_PO Homepage_PO;
+
+    public EleveniaSearchSteps(Homepage_PO Homepage_PO){
+        this.Homepage_PO = Homepage_PO;
+    }
 
     @Given("Open website {string}")
     public void open_website(String url) {
@@ -21,36 +27,24 @@ public class EleveniaSearchSteps extends BasePO {
     }
     @And("Located on elevenia website")
     public void located_on_elevenia_website(){
-        driver.findElement(By.id("mainPopBanner"));
-        driver.findElement(By.cssSelector(".btn-close")).click();
+        Homepage_PO.verifyPopupBanner();
+        Homepage_PO.clickPopupBanner();
     }
     @Then("I search for product terlaris in {string} keyword")
     public void i_search_for_product_terlaris_in_keyword(String searchKeyword) throws InterruptedException {
         Thread.sleep(2000);
-        sendKeys(By.id("AKCKwd"), searchKeyword);
-        sendKeys(By.id("AKCKwd"), String.valueOf(Keys.RETURN));
-        driver.findElement(By.xpath("//a[.='Produk terlaris']")).click();
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='prodListType']/ul[1]/li[1]/div[@class='group']")));
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//ul[@class='prodListType']/ul[1]/li[1]/div[@class='group']/a[1]")).click();
-
+        Homepage_PO.fillAndSearchHomepage(searchKeyword);
+        Homepage_PO.clickBtnFilterProdukTerlaris();
+        Homepage_PO.clickBtnBestSellerItem();
     }
     @Then("I add {string} items to my shopping cart")
     public void i_add_items_to_my_shopping_cart(String qtyNumbers) throws InterruptedException {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("optionStock")));
-        //driver.findElement(By.name("optionStock")).sendKeys(Keys.BACK_SPACE);
-        driver.findElement(By.name("optionStock")).sendKeys(Keys.BACK_SPACE,qtyNumbers);
-        Thread.sleep(100);
-        WebElement element = driver.findElement(By.xpath("//a[.='Tambahkan ke Cart']"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", element);
-        Thread.sleep(2000);
+        Homepage_PO.fillQtyItem(qtyNumbers);
+        Homepage_PO.clickBtnTambahkeCart();
     }
     @Then("I go to cart section")
     public void i_go_to_cart_section() throws InterruptedException {
+        Thread.sleep(2000);
         //driver.findElement(By.xpath("//a[@href='http://www.elevenia.co.id/cart/CartAction/getCartList.do']")).click();
         WebElement element = driver.findElement(By.xpath("//a[@href='http://www.elevenia.co.id/cart/CartAction/getCartList.do']"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
