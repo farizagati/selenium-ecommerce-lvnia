@@ -1,31 +1,19 @@
 package StepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import StepDefinitions.base.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class EleveniaSearchSteps {
-    WebDriver driver;
+import static Utilities.DriverFactory.getDriver;
 
-    @Before
-    public void setup(){
-        driver = WebDriverManager.chromedriver().create();
-        driver.manage().window().setSize(new Dimension(1920,1080));
-    }
-    @After
-    public void tearDown(){
-        driver.quit();
-    }
+public class EleveniaSearchSteps{
+    private WebDriver driver = getDriver();
 
     @Given("Open website {string}")
     public void open_website(String url) {
