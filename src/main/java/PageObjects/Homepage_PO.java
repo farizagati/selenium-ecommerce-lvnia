@@ -30,10 +30,10 @@ public class Homepage_PO extends BasePO{
     WebElement btnUbahKurir;
     private @FindBy(css = "strong")
     WebElement txtHeaderUbahKurir;
-    private @FindBy(name = ".btnClose")
-    WebElement btnBatalUbahKurir;
-    private @FindBy(id = "chkDelPopY")
+    private @FindBy(xpath = "//td[@class='btn cartfont']/a[.='Hapus']")
     WebElement btnHapusCartItem;
+    private @FindBy(id = "chkDelPopY")
+    WebElement btnYaHapusCartItem;
     private @FindBy(xpath = "//strong[.='Tidak ada produk di Shopping Cart.']")
     WebElement txtTidakAdaItemDiCart;
 
@@ -64,30 +64,20 @@ public class Homepage_PO extends BasePO{
         sendKeys(txtFieldQtyItem, String.valueOf(Keys.BACK_SPACE));
         sendKeys(txtFieldQtyItem, qtyNumbers);
     }
-    public void clickBtnTambahkeCart() throws InterruptedException {
-        Thread.sleep(2000);
+    public void clickBtnTambahkeCart(){
         waitForWebElementAndClick(btnTambahkeCart);
     }
-    public void clickBtnYaLihatCart() throws InterruptedException {
-        Thread.sleep(2000);
+    public void clickBtnYaLihatCart(){
         waitForWebElementAndClick(btnYaLihatCart);
-        Thread.sleep(3000);
         verifyElementPresent(txtHeaderProduk);
     }
-    public void clickBtnUbahKurir() throws InterruptedException {
-        Thread.sleep(1000);
+    public void clickBtnUbahKurir(){
         waitForWebElementAndClick(btnUbahKurir);
-        Thread.sleep(2000);
         verifyElementPresent(txtHeaderUbahKurir);
     }
-    public void clickBtnBatalUbahKurir() throws InterruptedException {
-        Thread.sleep(2000);
-        waitForWebElementAndClick(btnBatalUbahKurir);
-    }
-    public void clickBtnHapusCartItem() throws InterruptedException {
-        Thread.sleep(2000);
+    public void clickBtnHapusCartItem(){
         waitForWebElementAndClick(btnHapusCartItem);
-        Thread.sleep(3000);
+        waitForWebElementAndClick(btnYaHapusCartItem);
         verifyElementPresent(txtTidakAdaItemDiCart);
     }
 

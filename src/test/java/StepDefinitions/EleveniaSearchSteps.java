@@ -18,7 +18,6 @@ public class EleveniaSearchSteps extends BasePO {
 
     @Given("Open website {string}")
     public void open_website(String url) {
-        //driver.get(url);
         navigateTo_URL(url);
     }
     @And("Located on elevenia website")
@@ -28,7 +27,6 @@ public class EleveniaSearchSteps extends BasePO {
     }
     @Then("I search for product terlaris in {string} keyword")
     public void i_search_for_product_terlaris_in_keyword(String searchKeyword) throws InterruptedException {
-        Thread.sleep(2000);
         Homepage_PO.fillAndSearchHomepage(searchKeyword);
         Homepage_PO.clickBtnFilterProdukTerlaris();
         Homepage_PO.clickBtnBestSellerItem();
@@ -47,27 +45,13 @@ public class EleveniaSearchSteps extends BasePO {
         Homepage_PO.clickBtnUbahKurir();
     }
     @Then("I cancel to modify the courier option")
-    public void i_cancel_to_modify_the_courier_option() throws InterruptedException {
-        Homepage_PO.clickBtnBatalUbahKurir();
-        Thread.sleep(3000);
-
-        //driver.findElement(By.cssSelector(".btnWGray")).click();
+    public void i_cancel_to_modify_the_courier_option() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:closeLayer()");
     }
     @Then("I cancel the product on my shopping cart")
     public void i_cancel_the_product_on_my_shopping_cart() throws InterruptedException {
         Homepage_PO.clickBtnHapusCartItem();
-
-        /*
-        driver.findElement(By.xpath("//p[@class='alignL']/a[.='Hapus']")).click();
-        /*
-        WebElement element = driver.findElement(By.xpath("//p[@class='alignL']/a[.='Hapus']"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
-        executor.executeScript("arguments[0].click();", element);
-
-
-        driver.findElement(By.id("chkDelPopY")).click();
-        driver.findElement(By.xpath("//strong[.='Tidak ada produk di Shopping Cart.']"));
-        */
     }
 
 }

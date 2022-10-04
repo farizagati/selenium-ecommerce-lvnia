@@ -23,32 +23,32 @@ public class BasePO {
     }
 
     public void verifyElementPresent(By by) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
     public void verifyElementPresent(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void sendKeys(By by, String textToType) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(by)).sendKeys(textToType);
     }
 
     public void sendKeys(WebElement element, String textToType) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(textToType);
     }
 
     public void waitForWebElementAndClick(By by){
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(by)).click();
     }
 
     public void waitForWebElementAndClick(WebElement element){
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
